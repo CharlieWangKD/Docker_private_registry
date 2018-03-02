@@ -1,0 +1,12 @@
+---
+- name: Pull the image
+  docker_image:
+    name: "{{ item }}"
+  with_items: "{{docker.image}}"
+
+- name: Tag and push to local registry
+  docker_image:
+    name: "{{ item }}"
+    repository: "localhost:5000/{{ item }}"
+    push: yes
+  with_items: "{{docker.image}}"

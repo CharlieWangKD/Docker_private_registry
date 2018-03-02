@@ -1,0 +1,12 @@
+---
+ansible:
+  requirements:
+    - "python-pexpect"
+    - "python-mysqldb"
+    - "python-openssl"
+
+docker:
+  image:
+    - "solr"
+    - "elasticsearch"
+    - "ubuntu"
