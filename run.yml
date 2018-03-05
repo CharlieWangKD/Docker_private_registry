@@ -14,18 +14,8 @@
             update_cache: yes
           with_items: "{{ansible.requirements}}"
 
-        - name: Uninstall old docker versions
-          apt:
-            name: "{{ item }}"
-            state: absent
-          with_items:
-            - docker
-            - docker-engine
-            - docker.io
-
       rescue:
         - name: Error occours during installing packages. Try to remove the lock file of apt
-
           file:
             path: "{{ item }}"
             state: absent
@@ -40,6 +30,7 @@
         - name: Run "apt-get update" again after remove the lock
           apt:
             update_cache: yes
+          ignore_errors: yes
 
         - name: Install the packages that is required by ansible after fix the dpkg problem
           apt:

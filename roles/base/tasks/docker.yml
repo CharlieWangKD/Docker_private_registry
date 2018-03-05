@@ -34,19 +34,21 @@
         update_cache: no
         state: latest
 
-    #- name: Download Dependence Ansible Docker module
-    #  get_url:
-    #    url: https://bootstrap.pypa.io/get-pip.py
-    #    dest: /home/ubuntu/get-pip.py
-    #    mode: 0755
-    #
-    #- name: Install pip
-    #  shell: python get-pip.py
-    #  args:
-    #    chdir: /home/ubuntu/
-    #  become: true
-    #
-    #- name:
+    - name: Download Dependence Ansible Docker module
+      get_url:
+        url: https://bootstrap.pypa.io/get-pip.py
+        dest: /home/ubuntu/get-pip.py
+        mode: 0755
+
+    - name: Install pip
+      shell: python get-pip.py
+      args:
+        chdir: /home/ubuntu/
+      become: true
+
+    - name: Install docker-py module
+      pip:
+        name: docker-py
 
   when: is_docker_installed.rc > 0
   tags:
